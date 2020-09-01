@@ -13,6 +13,7 @@ import Product from './Product'
 import Logout from './Logout'
 import Login from './Login'
 import './Seller.css';
+import {CartItemsProvider} from './CartItemsContext'
 
 
 
@@ -25,17 +26,19 @@ function Seller() {
     }
     return(
         <Router>
-            <div>                      
-                <Switch>
-                    <Route exact path='/seller'>
-                        <SellerList></SellerList>
-                    </Route>
-                    <Route path='/seller/:sid' children={<Product />}>
+            <div>
+                <CartItemsProvider>                      
+                    <Switch>
+                        <Route exact path='/seller'>
+                            <SellerList></SellerList>
+                        </Route>
+                        <Route path='/seller/:sid' children={<Product />}>
 
-                    </Route>
-                    <Route path='/logout' component={Logout}></Route>
-                    <Route path='/' component={Login}></Route>
-                </Switch>
+                        </Route>
+                        <Route path='/logout' component={Logout}></Route>
+                        <Route path='/' component={Login}></Route>
+                    </Switch>
+                </CartItemsProvider>
             </div>
         </Router>
     );

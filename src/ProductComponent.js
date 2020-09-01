@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import {addCartItemAction,addToCartAction,reMoveFromCart} from './actions'
 import item1 from './001.jpg'
@@ -6,7 +6,9 @@ import item2 from './002.jpg'
 import item3 from './003.jpg'
 import item4 from './004.jpg'
 import PropTypes from 'prop-types';
+import {CartItemsContext} from './CartItemsContext'
 function ProductComponent(props){
+    //console.log(props.obj.sid)
     const dispatch = useDispatch();
     let seller1=[{name:"Item 1",price:10,source:item1,id:1},{name:"Item 2",price:20,source:item2,id:2},{name:"Item 3",price:30,source:item3,id:3}];
     let seller2=[{name:"Item 2",price:20,source:item2,id:4},{name:"Item 4",price:40,source:item4,id:5}];
@@ -22,6 +24,10 @@ function ProductComponent(props){
         backgroundColor:'green',
         color:'white'
     }
+    const [cartList,setCartList] = useContext(CartItemsContext);
+    // const addCartitemFunction = (k)=>{
+        
+    // }
     let productList;
     switch(props.obj.sid){
         case "1":{
@@ -31,9 +37,10 @@ function ProductComponent(props){
                     <br></br>
                     <p>{item.name}</p>
                     <p>Price : ${item.price}</p>
-                    <button style={btnstyle} onClick={()=>{dispatch(addCartItemAction({name:item.name,cost:item.price,id:item.id}));dispatch(addToCartAction())}}>Add to cart</button>
+                    <button style={btnstyle} onClick={()=>{setCartList([...cartList,{name:item.name,cost:item.price,id:item.id}]);dispatch(addToCartAction())}}>Add to cart</button>
                 </div>
             );
+            //console.log("Did this runn ???????????")
             break;
         }
         case "2":{
@@ -43,7 +50,7 @@ function ProductComponent(props){
                     <br></br>
                     <p>{item.name}</p>
                     <p>Price : ${item.price}</p>
-                    <button style={btnstyle} onClick={()=>{dispatch(addCartItemAction({name:item.name,cost:item.price,id:item.id}));dispatch(addToCartAction())}}>Add to cart</button>
+                    <button style={btnstyle} onClick={()=>{setCartList([...cartList,{name:item.name,cost:item.price,id:item.id}]);dispatch(addToCartAction())}}>Add to cart</button>
                 </div>
             );
             break;
@@ -55,7 +62,7 @@ function ProductComponent(props){
                     <br></br>
                     <p>{item.name}</p>
                     <p>Price : ${item.price}</p>
-                    <button style={btnstyle} onClick={()=>{dispatch(addCartItemAction({name:item.name,cost:item.price,id:item.id}));dispatch(addToCartAction())}}>Add to cart</button>
+                    <button style={btnstyle} onClick={()=>{setCartList([...cartList,{name:item.name,cost:item.price,id:item.id}]);dispatch(addToCartAction())}}>Add to cart</button>
                 </div>
             );
             break;
